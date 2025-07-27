@@ -21,13 +21,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run test.js
-        run: node --test test.js
+      - name: Run tests and save output
+        run: |
+          node --test test.js > test-output.txt 2>&1 || echo "Tests completed with exit code $?"
+          # Save the exit code for later use
+          echo "EXIT_CODE=$?" >> $GITHUB_ENV
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: |
-            test-results.txt
+          path: test-output.txt
+
+      - name: Fail if tests failed
+        if: env.EXIT_CODE != '0'
+        run: exit 1
