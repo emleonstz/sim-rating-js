@@ -1,0 +1,52 @@
+{
+    "name": "sim-rating-js",
+    "version": "1.0.0",
+    "description": "A lightweight 5-star rating system with SVG, HTML, and JSON outputs",
+    "main": "dist/Rating.js",
+    "module": "src/Rating.js",
+    "scripts": {
+        "test:unit": "jest",
+        "test:browser": "jest test/browser/test.js",
+        "test": "npm run test:unit && npm run test:browser",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage"
+    },
+    "keywords": [
+        "rating",
+        "5star",
+        "bars",
+        "review",
+        "stars",
+        "svg",
+        "interactive"
+    ],
+    "types": "types/Rating.d.ts",
+    "author": "Emleons",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.28.0",
+        "@babel/preset-env": "^7.28.0",
+        "@testing-library/jest-dom": "^6.6.4",
+        "babel-loader": "^10.0.0",
+        "jest": "^29.5.0",
+        "jsdom": "^26.1.0",
+        "puppeteer": "^24.15.0",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.0.1"
+    },
+    "files": [
+        "dist",
+        "src",
+        "README.md"
+    ],
+    "exports": {
+        ".": {
+            "import": "./src/Rating.js",
+            "require": "./dist/Rating.js",
+            "browser": "./dist/Rating.js",
+            "default": "./src/Rating.js"
+        },
+        "./dist/Rating.js": "./dist/Rating.js",
+        "./package.json": "./package.json"
+    }
+}

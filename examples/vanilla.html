@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vanilla JS Demo</title>
+    <script src="../dist/Rating.js"></script>
+</head>
+<body>
+    <div id="rating-container"></div>
+    <script>
+        const ratings = {
+            fiveStar: 42,
+            fourStar: 27,
+            threeStar: 15,
+            twoStar: 8,
+            oneStar: 4
+        };
+        
+        const rating = new SimRating.Rating(ratings, {
+            interactive: true
+        });
+        
+        document.getElementById('rating-container').innerHTML = rating.render('html');
+        
+        document.addEventListener('rating-change', (e) => {
+            console.log('User rated:', e.detail.rating);
+        });
+    </script>
+</body>
+</html>

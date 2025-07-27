@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ES Module Demo</title>
+</head>
+<body>
+    <div id="rating-container"></div>
+    <script type="module">
+        import Rating from '../src/Rating.js';
+        
+        const ratings = {
+            fiveStar: 42,
+            fourStar: 27,
+            threeStar: 15,
+            twoStar: 8,
+            oneStar: 4
+        };
+        
+        const rating = new Rating(ratings, {
+            interactive: true
+        });
+        
+        document.getElementById('rating-container').innerHTML = rating.render('html');
+        
+        document.addEventListener('rating-change', (e) => {
+            console.log('User rated:', e.detail.rating);
+        });
+    </script>
+</body>
+</html>

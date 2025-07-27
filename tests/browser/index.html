@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rating Component Browser Test</title>
+    <style>
+        .test-case { margin: 20px; padding: 20px; border: 1px solid #ccc; }
+        .test-title { font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Rating Component Browser Tests</h1>
+    
+    <div class="test-case">
+        <div class="test-title">1. Vanilla JS Usage (UMD)</div>
+        <div id="vanilla-rating"></div>
+    </div>
+    
+    <div class="test-case">
+        <div class="test-title">2. ES Module Usage</div>
+        <div id="module-rating"></div>
+    </div>
+    
+    <div class="test-case">
+        <div class="test-title">3. Interactive Test</div>
+        <div id="interactive-rating"></div>
+        <div id="interactive-output" style="margin-top: 10px;"></div>
+    </div>
+    
+    <!-- Vanilla JS test -->
+    <script src="../../dist/Rating.js"></script>
+    <script>
+        // Test 1: Vanilla JS
+        const vanillaRatings = {
+            fiveStar: 42,
+            fourStar: 27,
+            threeStar: 15,
+            twoStar: 8,
+            oneStar: 4
+        };
+        
+        const vanillaRating = new Rating(vanillaRatings, {
+            interactive: false,
+            size: '24px'
+        });
+        
+        document.getElementById('vanilla-rating').innerHTML = 
+            vanillaRating.render('html');
+    </script>
+    
+    <!-- ES Module test -->
+    <script type="module">
+        // Test 2: ES Module
+        import Rating from '../../src/Rating.js';
+        
+        const moduleRatings = {
+            fiveStar: 30,
+            fourStar: 20,
+            threeStar: 10,
+            twoStar: 5,
+            oneStar: 2
+        };
+        
+        const moduleRating = new Rating(moduleRatings, {
+            type: 'bars',
+            color: '#4CAF50'
+        });
+        
+        document.getElementById('module-rating').innerHTML = 
+            moduleRating.render('html');
+    </script>
+    
+    <!-- Interactive test -->
+    <script>
+        // Test 3: Interactive
+        const interactiveRatings = {
+            fiveStar: 0,
+            fourStar: 0,
+            threeStar: 0,
+            twoStar: 0,
+            oneStar: 0
+        };
+        
+        const interactiveRating = new Rating(interactiveRatings, {
+            interactive: true,
+            color: '#FF5722'
+        });
+        
+        document.getElementById('interactive-rating').innerHTML = 
+            interactiveRating.render('html');
+        
+        document.addEventListener('rating-change', (e) => {
+            document.getElementById('interactive-output').innerHTML = 
+                `User rated: ${e.detail.rating} stars`;
+        });
+    </script>
+</body>
+</html>
