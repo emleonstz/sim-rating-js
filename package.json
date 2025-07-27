@@ -21,6 +21,7 @@
         "interactive"
     ],
     "types": "types/Rating.d.ts",
+    "type": "module",
     "author": "Emleons",
     "license": "MIT",
     "devDependencies": {
@@ -41,12 +42,17 @@
     ],
     "exports": {
         ".": {
-            "import": "./src/Rating.js",
-            "require": "./dist/Rating.js",
+            "import": {
+                "types": "./types/Rating.d.ts",
+                "default": "./src/Rating.js"
+            },
+            "require": {
+                "types": "./types/Rating.d.ts",
+                "default": "./dist/Rating.js"
+            },
             "browser": "./dist/Rating.js",
             "default": "./src/Rating.js"
         },
-        "./dist/Rating.js": "./dist/Rating.js",
         "./package.json": "./package.json"
     }
 }

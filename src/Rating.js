@@ -48,10 +48,19 @@ class Rating {
     }
 
     // Calculate average rating (e.g., 4.2)
+    // In your Rating.js file, update the getAverage method:
     getAverage() {
+        const starValues = {
+            oneStar: 1,
+            twoStar: 2,
+            threeStar: 3,
+            fourStar: 4,
+            fiveStar: 5,
+        };
+
         const {total, sum} = Object.entries(this.ratings).reduce(
             (acc, [key, count]) => {
-                const value = parseInt(key.replace("Star", ""));
+                const value = starValues[key];
                 return {
                     total: acc.total + count,
                     sum: acc.sum + value * count,
@@ -139,8 +148,8 @@ class Rating {
         return `
       <div class="sim-rating-bars" style="width:100%">
         ${Object.entries(this.getStarLabels())
-          .map(([key, label]) => this.renderBar(key, label, distribution[key] || 0, this.ratings[key] || 0, options))
-          .join("")}
+        .map(([key, label]) => this.renderBar(key, label, distribution[key] || 0, this.ratings[key] || 0, options))
+        .join("")}
         ${options.showSummary ? this.renderSummary() : ""}
       </div>
     `;
@@ -342,13 +351,19 @@ class Rating {
     }
 }
 
-// Export for different environments
+// First, declare the class as an ES module export
+export default Rating;
+
+// Then add universal export support
 if (typeof module !== "undefined" && module.exports) {
+    // CommonJS/Node.js environment
     module.exports = Rating;
+    module.exports.default = Rating; // For ES module interop
 } else if (typeof define === "function" && define.amd) {
+    // AMD/RequireJS environment
     define([], () => Rating);
 } else if (typeof window !== "undefined") {
-    // Create a namespace to avoid global pollution
+    // Browser global environment
     window.SimRating = window.SimRating || {};
     window.SimRating.Rating = Rating;
 }
